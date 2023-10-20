@@ -56,7 +56,7 @@ void testdrawstyles002(void);
 void testscrolltext(void);
 void testdrawbitmap(void);
 void testanimate(const uint8_t *, uint8_t, uint8_t );
-
+void url(void);
 
 void setup() {
   Serial.begin(115200);
@@ -91,6 +91,7 @@ void setup() {
 void loop() {
   display.display();
   delay(2000);
+  // url();
   // display.display() is NOT necessary after every single drawing command,
   // unless that's what you want...rather, you can batch up a bunch of
   // drawing operations and then update the screen all at once by calling
@@ -122,13 +123,12 @@ void loop() {
   testscrolltext();    // Draw scrolling text
 
   testdrawbitmap();    // Draw a small bitmap image
-
   // Invert and restore display, pausing in-between
   display.invertDisplay(true);
   delay(1000);
   display.invertDisplay(false);
   delay(1000);
-
+  url();
 }
 
 void testdrawline() {
@@ -326,19 +326,12 @@ void testdrawstyles(void) {
   display.setTextColor(WHITE);        // Draw white text
   display.setCursor(0,0);             // Start at top-left corner
   display.println(F("Happy Birthday Brian!\r\n"));
-  display.println(F(" I really enjoyed meeting you,\
-you are always trying new machines and technologies.\r\n\
+  display.println(F(" I really enjoyed meeting you, \
+you are always trying new machines and technologies. \r\n\
 I enjoy helping you with that."));
 
-  display.setTextColor(BLACK, WHITE); // Draw 'inverse' text
-  display.println(F("          Pierrick"));
-
-  display.setTextSize(2);             // Draw 2X-scale text
-  display.setTextColor(WHITE);
-  // display.print(F("0x")); display.println(0xDEADBEEF, HEX);
-
   display.display();
-  delay(20000);
+  delay(15000);
 }
 
 void testdrawstyles002(void) {
@@ -351,14 +344,10 @@ void testdrawstyles002(void) {
   display.println(F(" I hope we will have the opportunity to experiment with more machines in the futur"));
 
   display.setTextColor(BLACK, WHITE); // Draw 'inverse' text
-  display.println(3.141592);
-
-  display.setTextSize(2);             // Draw 2X-scale text
-  display.setTextColor(WHITE);
-  // display.print(F("0x")); display.println(0xDEADBEEF, HEX);
+  display.println(F("          Pierrick"));
 
   display.display();
-  delay(20000);
+  delay(15000);
 }
 
 void testscrolltext(void) {
@@ -393,6 +382,20 @@ void testscrolltext(void) {
   delay(1000);
 }
 
+
+void url(void) {
+  display.clearDisplay();
+
+  display.setTextSize(1);             // Normal 1:1 pixel scale
+  display.setTextColor(WHITE);        // Draw white text
+  display.setCursor(0,0);             // Start at top-left corner
+  display.println(F("Open Source\r\nCode available at:"));
+  display.println(F("\r\nhttps://github.com/\r\n  BPier/\r\n  HappyBirthdayBrian"));
+  // display.print(F("0x")); display.println(0xDEADBEEF, HEX);
+
+  display.display();
+  delay(20000);
+}
 void testdrawbitmap(void) {
   display.clearDisplay();
 
