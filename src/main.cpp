@@ -62,6 +62,7 @@ void setup() {
   Serial.begin(115200);
   pinMode(4, OUTPUT);
   digitalWrite(4, HIGH); 
+  pinMode(18,OUTPUT);
   delay(2000);
   // Start Wifi so the power draw is high enough to keep the battery ON
   WiFi.mode(WIFI_STA);
@@ -89,6 +90,7 @@ void setup() {
 }
 
 void loop() {
+  digitalWrite(18,HIGH);
   display.display();
   delay(2000);
   // url();
@@ -97,30 +99,44 @@ void loop() {
   // drawing operations and then update the screen all at once by calling
   // display.display(). These examples demonstrate both approaches...
   testscrolltext();
+  digitalWrite(18,LOW);
+
   testdrawstyles();    // Draw 'stylized' characters
   testdrawstyles002(); 
+  digitalWrite(18,HIGH);
+
   testdrawline();      // Draw many lines
+  digitalWrite(18,LOW);
 
   testdrawrect();      // Draw rectangles (outlines)
+  digitalWrite(18,HIGH);
 
   testfillrect();      // Draw rectangles (filled)
+  digitalWrite(18,LOW);
 
   testdrawcircle();    // Draw circles (outlines)
+  digitalWrite(18,HIGH);
 
   testfillcircle();    // Draw circles (filled)
+  digitalWrite(18,LOW);
 
   testdrawroundrect(); // Draw rounded rectangles (outlines)
+  digitalWrite(18,HIGH);
 
   testfillroundrect(); // Draw rounded rectangles (filled)
+  digitalWrite(18,LOW);
 
   testdrawtriangle();  // Draw triangles (outlines)
+  digitalWrite(18,HIGH);
 
   testfilltriangle();  // Draw triangles (filled)
+  digitalWrite(18,LOW);
 
   testdrawchar();      // Draw characters of the default font
-
+  digitalWrite(18,HIGH);
 
   testscrolltext();    // Draw scrolling text
+  digitalWrite(18,LOW);
 
   testdrawbitmap();    // Draw a small bitmap image
   // Invert and restore display, pausing in-between
@@ -129,6 +145,8 @@ void loop() {
   display.invertDisplay(false);
   delay(1000);
   url();
+  digitalWrite(18,HIGH);
+
 }
 
 void testdrawline() {
@@ -328,7 +346,7 @@ void testdrawstyles(void) {
   display.println(F("Happy Birthday Brian!\r\n"));
   display.println(F(" I really enjoyed meeting you, \
 you are always trying new machines and technologies. \r\n\
-I enjoy helping you with that."));
+ I enjoy helping you with that."));
 
   display.display();
   delay(15000);
@@ -344,7 +362,7 @@ void testdrawstyles002(void) {
   display.println(F(" I hope we will have the opportunity to experiment with more machines in the futur"));
 
   display.setTextColor(BLACK, WHITE); // Draw 'inverse' text
-  display.println(F("          Pierrick"));
+  display.println(F("\r\n             Pierrick"));
 
   display.display();
   delay(15000);
